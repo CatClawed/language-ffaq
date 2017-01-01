@@ -63,7 +63,7 @@
       '1':
         'name': 'markup.heading.marker.gfm'
       '2':
-        'name': 'markup.heading.marker.gfm'
+        'name': 'markup.heading.space.gfm'
         'patterns': [
           {
             'include': '$self'
@@ -78,7 +78,7 @@
       '1':
         'name': 'markup.heading.marker.gfm'
       '2':
-        'name': 'markup.heading.marker.gfm'
+        'name': 'markup.heading.space.gfm'
         'patterns': [
           {
             'include': '$self'
@@ -93,7 +93,7 @@
       '1':
         'name': 'markup.heading.marker.gfm'
       '2':
-        'name': 'markup.heading.marker.gfm'
+        'name': 'markup.heading.space.gfm'
         'patterns': [
           {
             'include': '$self'
@@ -108,7 +108,7 @@
       '1':
         'name': 'markup.heading.marker.gfm'
       '2':
-        'name': 'markup.heading.marker.gfm'
+        'name': 'markup.heading.space.gfm'
         'patterns': [
           {
             'include': '$self'
