@@ -6,7 +6,7 @@ A simple grammar for GameFAQs Formatted FAQs. This is largely inspired by the la
  * The shortcut in which you drop ```=-=``` out of boxes doesn't display quite right. There is a form of support for the shortcut, but it takes the highlighting away from the next heading.
  * I went with the easiest implementation possible so there's probably more.
  * Inline spoilers actually display as bold-italics.
- * ```//``` is an escape character. I give no flips about it and don't bother including it.
+ * ```\\``` is an escape character. I give no flips about it and don't bother including it.
 
 * Install Instructions
  * Since I don't intend to make this official in any respect, you need to jump through a small hoop.
