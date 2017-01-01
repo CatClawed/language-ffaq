@@ -1,0 +1,256 @@
+'fileTypes': ['ffaq']
+'name': 'GameFAQs Formatted FAQ'
+'scopeName': 'text.ffaq'
+'patterns':[
+  # Comment
+  {
+    'match': '(\^( |\t)*(;).*$\\n?)'
+    'name': 'comment.line.semi-colon.ffaq'
+    #'match': '((#).*$\\n?)|(\\n\s*(;).*$\\n?)'
+  }
+  # Asterisk List
+  {
+      'match': '(\^( |\t)*(([*]){1,3}))'
+      #'end': '(\'\'\')'
+      'captures':
+        '1':
+          'name': 'variable.unordered.list.ffaq'
+  }
+  # Indented List (Colon)
+  {
+      'match': '(\^( |\t)*(([\:*]){1,3}))'
+      #'end': '(\'\'\')'
+      'captures':
+        '1':
+          'name': 'variable.unordered.list.ffaq'
+  }
+  # Ordered List
+  {
+      'match': '(\^( |\t)*(([#]){1,3}))'
+      'captures':
+        '1':
+          'name': 'variable.ordered.list.ffaq'
+  }
+  # Horizontal Rule
+  {
+      'match': '(\^( |\t)*(%){1})'
+      'name': 'constant.character.ffaq'
+  }
+    # Box + Spoiler Box
+    # Will stop at next section, but messes up header display when you do that.
+    {
+      'begin': '(\^( |\t)*((=--.+--=$)|(=S=)))'
+      'end': '(([=-=]$)|(\^( |\t)*==))'
+      'name': 'markup.quote.ffaq'
+      'beginCaptures':
+        '1':
+          'name': 'markup.quote.ffaq'
+      'patterns': [
+        {
+          'include': '$self'
+        }
+      ]
+    }
+  ###############
+  # Headers
+  ###############
+  {
+    'begin': '(\^( |\t)*(([=]){5}))'
+    'end': '(([=]){5})'
+    'name': 'markup.heading.heading-4.ffaq'
+    'captures':
+      '1':
+        'name': 'markup.heading.marker.ffaq'
+      '2':
+        'name': 'markup.heading.space.ffaq'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+  }
+  {
+    'begin': '(\^( |\t)*(([=]){4}))'
+    'end': '(([=]){4})'
+    'name': 'markup.heading.heading-3.ffaq'
+    'captures':
+      '1':
+        'name': 'markup.heading.marker.ffaq'
+      '2':
+        'name': 'markup.heading.space.ffaq'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+  }
+  {
+    'begin': '(\^( |\t)*(([=]){3}))'
+    'end': '(([=]){3})'
+    'name': 'markup.heading.heading-2.ffaq'
+    'captures':
+      '1':
+        'name': 'markup.heading.marker.ffaq'
+      '2':
+        'name': 'markup.heading.space.ffaq'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+  }
+  {
+    'begin': '(\^( |\t)*(([=]){2}))'
+    'end': '(([=]){2})'
+    'name': 'markup.heading.heading-1.ffaq'
+    'captures':
+      '1':
+        'name': 'markup.heading.marker.ffaq'
+      '2':
+        'name': 'markup.heading.space.ffaq'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+  }
+  # Spoilers
+  {
+    'begin': '(-s-)'
+    'end': '(-s-)'
+    'name': 'markup.bold.italic.ffaq'
+    'patterns': [
+      {
+        'match': '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
+        'name': 'constant.character.entity.ffaq'
+        'captures':
+          '1':
+            'name': 'punctuation.definition.entity.ffaq'
+          '3':
+            'name': 'punctuation.definition.entity.ffaq'
+      }
+    ]
+  }
+  # Link
+  {
+    'match': '((\\[{2})([^\\[])+(\\]{2}))'
+    'name': 'link'
+    'captures':
+     '1':
+        'name': 'markup.underline.link.ffaq'
+  }
+
+  # Preformatted Text
+  {
+    'begin': '(\^( |\t)*([+]){1,})'
+    'beginCaptures':
+      '0':
+        'name': 'support.ffaq'
+    'end': '$'
+    'endCaptures':
+      '0':
+        'name': 'support.ffaq'
+    'name': 'markup.raw.ffaq'
+  }
+  # Images.
+  {
+    'match': '^( |\t)*[\\^]{1}(s|l)(l|r)?\\d{1,3}(\\|)'
+    'name': 'keyword.control.ffaq'
+  }
+  # YouTube
+  {
+    'match': '^( |\t)*[@]{1}(l|r)+(\\|)\\d{11}'
+    'name': 'keyword.control.ffaq'
+  }
+  # Tables. Displays as 'code'.
+  {
+    'begin': '(\^( |\t)*([|][*]?([+|-].)?))'
+    'beginCaptures':
+      '0':
+        'name': 'constant.character.ffaq'
+    'end': '$'
+    'endCaptures':
+      '0':
+        'name': 'constant.character.ffaq'
+    'name': 'markup.code.ffaq'
+    'contentName': 'text.embedded.ffaq'
+    'patterns': [
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  # Tables. There's something about coloring those pipes.
+  {
+    'match': '([|][*]?([+|-].)?)'
+    'name': 'constant.character.ffaq'
+  }
+  # Bold-Italics
+  {
+    'begin': '(\'{5})'
+    'end': '(\'{5})'
+    'name': 'markup.bold.italic.ffaq'
+    'patterns': [
+      {
+        'match': '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
+        'name': 'constant.character.entity.ffaq'
+        'captures':
+          '1':
+            'name': 'punctuation.definition.entity.ffaq'
+          '3':
+            'name': 'punctuation.definition.entity.ffaq'
+      }
+    ]
+  }
+  # Italic
+  {
+    'begin': '(\'{3})'
+    'end': '(\'{3})'
+    'name': 'markup.italic.ffaq'
+    'patterns': [
+      {
+        'match': '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
+        'name': 'constant.character.entity.ffaq'
+        'captures':
+          '1':
+            'name': 'punctuation.definition.entity.ffaq'
+          '3':
+            'name': 'punctuation.definition.entity.ffaq'
+      }
+    ]
+  }
+  # Bold
+  {
+    'begin': '(\'{2})'
+    'end': '(\'{2})'
+    'name': 'markup.bold.ffaq'
+    'patterns': [
+      {
+        'match': '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
+        'name': 'constant.character.entity.ffaq'
+        'captures':
+          '1':
+            'name': 'punctuation.definition.entity.ffaq'
+          '3':
+            'name': 'punctuation.definition.entity.ffaq'
+      }
+    ]
+  }
+  # Underline
+  {
+    'begin': '(--u--)'
+    'end': '(--u--)'
+    'name': 'markup.underline.ffaq'
+    'patterns': [
+      {
+        'match': '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
+        'name': 'constant.character.entity.ffaq'
+        'captures':
+          '1':
+            'name': 'punctuation.definition.entity.ffaq'
+          '3':
+            'name': 'punctuation.definition.entity.ffaq'
+      }
+    ]
+  }
+]

@@ -1,0 +1,3 @@
+'.text.ffaq':
+  'editor':
+    'commentStart': '# '
