@@ -10,7 +10,7 @@
   }
   # Asterisk List
   {
-      'match': '(\^( |\t)*(([*]){1,3}))'
+      'match': '(\^( |\t)*(([*]){1,5}))'
       #'end': '(\'\'\')'
       'captures':
         '1':
@@ -18,7 +18,7 @@
   }
   # Indented List (Colon)
   {
-      'match': '(\^( |\t)*(([\:*]){1,3}))'
+      'match': '(\^( |\t)*(([\:*]){1,5}))'
       #'end': '(\'\'\')'
       'captures':
         '1':
@@ -26,7 +26,7 @@
   }
   # Ordered List
   {
-      'match': '(\^( |\t)*(([#]){1,3}))'
+      'match': '(\^( |\t)*(([#]){1,5}))'
       'captures':
         '1':
           'name': 'variable.ordered.list.ffaq'
@@ -159,7 +159,7 @@
   }
   # YouTube
   {
-    'match': '^( |\t)*[@]{1}(l|r)+(\\|)\\d{11}'
+    'match': '^( |\t)*[@]{1}(l|r)+(\\|)[a-zA-Z0-9_-]{11}'
     'name': 'keyword.control.ffaq'
   }
   # Tables. Displays as 'code'.
