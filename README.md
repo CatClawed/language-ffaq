@@ -1,5 +1,7 @@
 A simple grammar for GameFAQs Formatted FAQs. This is largely inspired by the language-gfm package.
 
+If you save your file with the .ffaq extention it should automatically detect.
+
 * Known Limitations
  * If you want to break it, you're going to break it.
  * Be careful with bolds/italics/underlines. ```'''''``` works for bold/italics, but don't do something like ```''Bold '''italic bold'' italic'''``` or you're asking for trouble.
