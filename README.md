@@ -12,5 +12,5 @@ If you save your file with the .ffaq extention it should automatically detect.
 
 * Install Instructions
  * Since I don't intend to make this official in any respect, you need to jump through a small hoop.
- * Clone this to your preferred directly or unzip the file wherever you're going to keep it forever.
+ * Clone this to your preferred directory or unzip the file wherever you're going to keep it forever.
  * Bring up the [terminal (Apple)](http://lifehacker.com/launch-an-os-x-terminal-window-from-a-specific-folder-1466745514) or [command prompt (Windows)](http://www.techsupportalert.com/content/how-open-windows-command-prompt-any-folder.htm) in that folder and enter ```apm link```
