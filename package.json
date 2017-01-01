@@ -7,7 +7,7 @@
     "grammar",
     "syntax"
   ],
-  "repository": "",
+  "repository": "https://github.com/CatClawed/language-ffaq",
   "license": "Public Domain",
   "engines": {
     "atom": "*"

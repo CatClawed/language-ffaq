@@ -1,11 +1,11 @@
 'fileTypes': ['ffaq']
 'name': 'GameFAQs Formatted FAQ'
-'scopeName': 'text.ffaq'
+'scopeName': 'text.gfm'
 'patterns':[
   # Comment
   {
     'match': '(\^( |\t)*(;).*$\\n?)'
-    'name': 'comment.line.semi-colon.ffaq'
+    'name': 'comment.line.semi-colon.gfm'
     #'match': '((#).*$\\n?)|(\\n\s*(;).*$\\n?)'
   }
   # Asterisk List
@@ -14,7 +14,7 @@
       #'end': '(\'\'\')'
       'captures':
         '1':
-          'name': 'variable.unordered.list.ffaq'
+          'name': 'variable.unordered.list.gfm'
   }
   # Indented List (Colon)
   {
@@ -22,47 +22,48 @@
       #'end': '(\'\'\')'
       'captures':
         '1':
-          'name': 'variable.unordered.list.ffaq'
+          'name': 'variable.unordered.list.gfm'
   }
   # Ordered List
   {
       'match': '(\^( |\t)*(([#]){1,5}))'
       'captures':
         '1':
-          'name': 'variable.ordered.list.ffaq'
+          'name': 'variable.ordered.list.gfm'
   }
   # Horizontal Rule
   {
       'match': '(\^( |\t)*(%){1})'
-      'name': 'constant.character.ffaq'
+      'name': 'constant.character.gfm'
   }
-    # Box + Spoiler Box
-    # Will stop at next section, but messes up header display when you do that.
-    {
-      'begin': '(\^( |\t)*((=--.+--=$)|(=S=)))'
-      'end': '(([=-=]$)|(\^( |\t)*==))'
-      'name': 'markup.quote.ffaq'
-      'beginCaptures':
-        '1':
-          'name': 'markup.quote.ffaq'
-      'patterns': [
-        {
-          'include': '$self'
-        }
-      ]
-    }
+  # Box + Spoiler Box
+  # I win with positive lookahead. This regex syntax sucks; the search bar is better!
+  {
+    'begin': '(\^( |\t)*((=--.+--=$)|(=S=)))'
+    'end': '((\^( |\t)*)(=\-=$)$|(\^)(?=((\t| )*\=\=)))'
+    # (\r|\n)(?=(^(\t| )*==)) works in the search bar, why my life
+    'name': 'markup.quote.gfm'
+    'beginCaptures':
+      '1':
+        'name': 'markup.quote.gfm'
+    'patterns': [
+      {
+        'include': '$self'
+      }
+    ]
+  }
   ###############
   # Headers
   ###############
   {
     'begin': '(\^( |\t)*(([=]){5}))'
     'end': '(([=]){5})'
-    'name': 'markup.heading.heading-4.ffaq'
+    'name': 'markup.heading.heading-5.gfm'
     'captures':
       '1':
-        'name': 'markup.heading.marker.ffaq'
+        'name': 'markup.heading.marker.gfm'
       '2':
-        'name': 'markup.heading.space.ffaq'
+        'name': 'markup.heading.marker.gfm'
         'patterns': [
           {
             'include': '$self'
@@ -72,12 +73,12 @@
   {
     'begin': '(\^( |\t)*(([=]){4}))'
     'end': '(([=]){4})'
-    'name': 'markup.heading.heading-3.ffaq'
+    'name': 'markup.heading.heading-4.gfm'
     'captures':
       '1':
-        'name': 'markup.heading.marker.ffaq'
+        'name': 'markup.heading.marker.gfm'
       '2':
-        'name': 'markup.heading.space.ffaq'
+        'name': 'markup.heading.marker.gfm'
         'patterns': [
           {
             'include': '$self'
@@ -87,12 +88,12 @@
   {
     'begin': '(\^( |\t)*(([=]){3}))'
     'end': '(([=]){3})'
-    'name': 'markup.heading.heading-2.ffaq'
+    'name': 'markup.heading.heading-3.gfm'
     'captures':
       '1':
-        'name': 'markup.heading.marker.ffaq'
+        'name': 'markup.heading.marker.gfm'
       '2':
-        'name': 'markup.heading.space.ffaq'
+        'name': 'markup.heading.marker.gfm'
         'patterns': [
           {
             'include': '$self'
@@ -100,14 +101,14 @@
         ]
   }
   {
-    'begin': '(\^( |\t)*(([=]){2}))'
-    'end': '(([=]){2})'
-    'name': 'markup.heading.heading-1.ffaq'
+    'begin': '(\^( |\t)*(={2}))'
+    'end': '(={2})'
+    'name': 'markup.heading.heading-2.gfm'
     'captures':
       '1':
-        'name': 'markup.heading.marker.ffaq'
+        'name': 'markup.heading.marker.gfm'
       '2':
-        'name': 'markup.heading.space.ffaq'
+        'name': 'markup.heading.marker.gfm'
         'patterns': [
           {
             'include': '$self'
@@ -118,26 +119,34 @@
   {
     'begin': '(-s-)'
     'end': '(-s-)'
-    'name': 'markup.bold.italic.ffaq'
+    'name': 'markup.bold.italic.gfm'
     'patterns': [
       {
         'match': '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
-        'name': 'constant.character.entity.ffaq'
+        'name': 'constant.character.entity.gfm'
         'captures':
           '1':
-            'name': 'punctuation.definition.entity.ffaq'
+            'name': 'punctuation.definition.entity.gfm'
           '3':
-            'name': 'punctuation.definition.entity.ffaq'
+            'name': 'punctuation.definition.entity.gfm'
       }
     ]
   }
   # Link
+  # Maybe I can come back sometime far in the future and create pipe support.
+  # My preference is to have the brackets highlighted, hence the commented out stuff.
   {
-    'match': '((\\[{2})([^\\[])+(\\]{2}))'
-    'name': 'link'
+    'match': '((\\[{2})(([^\\[])+)(\\]{2}))'
+    'name': 'link.gfm'
     'captures':
-     '1':
-        'name': 'markup.underline.link.ffaq'
+        '1':
+            'name': 'markup.underline.link.gfm'
+        #'3':
+        #    'name': 'markup.underline.link.gfm'
+        #'2':
+        #    'name': 'punctuation.definition.begin.gfm'
+        #'4':
+        #    'name': 'punctuation.definition.begin.gfm'
   }
 
   # Preformatted Text
@@ -145,35 +154,35 @@
     'begin': '(\^( |\t)*([+]){1,})'
     'beginCaptures':
       '0':
-        'name': 'support.ffaq'
+        'name': 'support.gfm'
     'end': '$'
     'endCaptures':
       '0':
-        'name': 'support.ffaq'
-    'name': 'markup.raw.ffaq'
+        'name': 'support.gfm'
+    'name': 'markup.raw.gfm'
   }
   # Images.
   {
     'match': '^( |\t)*[\\^]{1}(s|l)(l|r)?\\d{1,3}(\\|)'
-    'name': 'keyword.control.ffaq'
+    'name': 'keyword.control.gfm'
   }
   # YouTube
   {
     'match': '^( |\t)*[@]{1}(l|r)+(\\|)[a-zA-Z0-9_-]{11}'
-    'name': 'keyword.control.ffaq'
+    'name': 'keyword.control.gfm'
   }
   # Tables. Displays as 'code'.
   {
     'begin': '(\^( |\t)*([|][*]?([+|-].)?))'
     'beginCaptures':
       '0':
-        'name': 'constant.character.ffaq'
+        'name': 'constant.character.gfm'
     'end': '$'
     'endCaptures':
       '0':
-        'name': 'constant.character.ffaq'
-    'name': 'markup.code.ffaq'
-    'contentName': 'text.embedded.ffaq'
+        'name': 'constant.character.gfm'
+    'name': 'markup.code.gfm'
+    'contentName': 'text.embedded.gfm'
     'patterns': [
       {
         'include': '$self'
@@ -183,22 +192,22 @@
   # Tables. There's something about coloring those pipes.
   {
     'match': '([|][*]?([+|-].)?)'
-    'name': 'constant.character.ffaq'
+    'name': 'constant.character.gfm'
   }
   # Bold-Italics
   {
     'begin': '(\'{5})'
     'end': '(\'{5})'
-    'name': 'markup.bold.italic.ffaq'
+    'name': 'markup.bold.italic.gfm'
     'patterns': [
       {
         'match': '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
-        'name': 'constant.character.entity.ffaq'
+        'name': 'constant.character.entity.gfm'
         'captures':
           '1':
-            'name': 'punctuation.definition.entity.ffaq'
+            'name': 'punctuation.definition.entity.gfm'
           '3':
-            'name': 'punctuation.definition.entity.ffaq'
+            'name': 'punctuation.definition.entity.gfm'
       }
     ]
   }
@@ -206,16 +215,16 @@
   {
     'begin': '(\'{3})'
     'end': '(\'{3})'
-    'name': 'markup.italic.ffaq'
+    'name': 'markup.italic.gfm'
     'patterns': [
       {
         'match': '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
-        'name': 'constant.character.entity.ffaq'
+        'name': 'constant.character.entity.gfm'
         'captures':
           '1':
-            'name': 'punctuation.definition.entity.ffaq'
+            'name': 'punctuation.definition.entity.gfm'
           '3':
-            'name': 'punctuation.definition.entity.ffaq'
+            'name': 'punctuation.definition.entity.gfm'
       }
     ]
   }
@@ -223,16 +232,16 @@
   {
     'begin': '(\'{2})'
     'end': '(\'{2})'
-    'name': 'markup.bold.ffaq'
+    'name': 'markup.bold.gfm'
     'patterns': [
       {
         'match': '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
-        'name': 'constant.character.entity.ffaq'
+        'name': 'constant.character.entity.gfm'
         'captures':
           '1':
-            'name': 'punctuation.definition.entity.ffaq'
+            'name': 'punctuation.definition.entity.gfm'
           '3':
-            'name': 'punctuation.definition.entity.ffaq'
+            'name': 'punctuation.definition.entity.gfm'
       }
     ]
   }
@@ -240,16 +249,16 @@
   {
     'begin': '(--u--)'
     'end': '(--u--)'
-    'name': 'markup.underline.ffaq'
+    'name': 'markup.underline.gfm'
     'patterns': [
       {
         'match': '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
-        'name': 'constant.character.entity.ffaq'
+        'name': 'constant.character.entity.gfm'
         'captures':
           '1':
-            'name': 'punctuation.definition.entity.ffaq'
+            'name': 'punctuation.definition.entity.gfm'
           '3':
-            'name': 'punctuation.definition.entity.ffaq'
+            'name': 'punctuation.definition.entity.gfm'
       }
     ]
   }

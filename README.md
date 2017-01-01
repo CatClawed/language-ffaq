@@ -2,14 +2,13 @@ A simple grammar for GameFAQs Formatted FAQs. This is largely inspired by the la
 
 If you save your file with the .ffaq extention it should automatically detect.
 
-* Known Limitations
+* Known Limitations / Quirks
  * If you want to break it, you're going to break it.
  * Be careful with bolds/italics/underlines. ```'''''``` works for bold/italics, but don't do something like ```''Bold '''italic bold'' italic'''``` or you're asking for trouble.
- * The shortcut in which you drop ```=-=``` out of boxes doesn't display quite right. There is a form of support for the shortcut, but it takes the highlighting away from the next heading.
- * I went with the easiest implementation possible so there's probably more.
  * Inline spoilers actually display as bold-italics.
  * ```\\``` is an escape character. I give no flips about it and don't bother including it.
- * Best viewed under the One Dark theme. Other themes may require some editing on your part -- either of this grammar or of your chosen theme.
+ * This is a simple implementation and doesn't 100% follow the rules of GFAQs. It gets close enough.
+ * Some themes, such as Seti, won't display correctly. I don't know how to fix this.
 
 * Install Instructions
  * Since I don't intend to make this official in any respect, you need to jump through a small hoop.
