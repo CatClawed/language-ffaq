@@ -9,6 +9,7 @@ If you save your file with the .ffaq extention it should automatically detect.
  * I went with the easiest implementation possible so there's probably more.
  * Inline spoilers actually display as bold-italics.
  * ```\\``` is an escape character. I give no flips about it and don't bother including it.
+ * Best viewed under the One Dark theme. Other themes may require some editing on your part -- either of this grammar or of your chosen theme.
 
 * Install Instructions
  * Since I don't intend to make this official in any respect, you need to jump through a small hoop.
